@@ -2,6 +2,11 @@ import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error('Missing database connection string');
+}
+
 const client = await db.connect();
 
 async function seedUsers() {
